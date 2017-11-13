@@ -1,14 +1,22 @@
 pipeline {
-    agent {
-        docker {
-            image 'maven:3-alpine' 
-            args '-v /Users/weibo/.m2:/root/.m2' 
-        }
+    agent any
+    tools { 
+        maven 'Maven350' 
+        jdk 'jdk8' 
     }
     stages {
-        stage('Build') { 
+        stage ('Initialize') {
             steps {
-                sh 'mvn clean package' 
+                sh '''
+                    echo "PATH = ${PATH}"
+                    echo "M2_HOME = ${M2_HOME}"
+                ''' 
+            }
+        }
+
+        stage ('Build') {
+            steps {
+                echo 'This is a minimal pipeline.'
             }
         }
     }
