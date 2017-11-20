@@ -1,15 +1,9 @@
-pipeline {
-    agent {
-        docker {
-            image 'maven:3-alpine'
-            args '-v $HOME/.m2:/Users/weibo/.m2'
-        }
-    }
-    stages {
-        stage('Build') {
-            steps {
-                sh 'env'
-            }
-        }
+node {
+    checkout scm
+
+    def customImage = docker.build("my-image:${env.BUILD_ID}")
+
+    customImage.inside {
+        sh 'make test'
     }
 }
