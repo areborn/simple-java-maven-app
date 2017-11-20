@@ -8,7 +8,7 @@ pipeline {
         }
         stage('Front-end') {
             agent {
-                dockerfile:true
+                dockerfile true
             }
             steps {
                 sh 'java -version'
