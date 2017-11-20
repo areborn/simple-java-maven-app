@@ -2,13 +2,13 @@ pipeline {
     agent {
         docker {
             image 'maven:3-alpine'
-            args '-v $HOME/.m2:/root/.m2'
+            args '-v $HOME/.m2:/Users/weibo/.m2'
         }
     }
     stages {
         stage('Build') {
             steps {
-                sh 'echo $HOME'
+                sh 'mvn install'
             }
         }
     }
