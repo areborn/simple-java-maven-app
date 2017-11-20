@@ -1,23 +1,12 @@
 pipeline {
-    agent any
-    tools { 
-        maven 'Maven350' 
-        jdk 'jdk8' 
+    agent {
+        docker { image 'node:7-alpine' }
     }
     stages {
-        stage ('Initialize') {
+        stage('Test') {
             steps {
-                sh '''
-                    echo "PATH = ${PATH}"
-                    echo "M2_HOME = ${M2_HOME}"
-                ''' 
+                sh 'node --version'
             }
-        }
-
-        stage ('Build') {
- 					steps {
-                sh 'mvn -Dmaven.test.failure.ignore=true install' 
-          }
         }
     }
 }
